@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include requirements.txt
+recursive-include behapy *.py
+recursive-include examples *.ipynb
+recursive-include tests *.py
