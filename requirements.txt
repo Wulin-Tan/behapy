@@ -17,3 +17,8 @@ igraph
 networkx
 annoy>=1.17.0
 statsmodels
+shapely>=1.7.0
+openpyxl>=3.0.0
+neo>=0.10.0
+moviepy>=1.0.0
+opencv-python>=4.5.0
