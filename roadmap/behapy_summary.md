@@ -9,6 +9,7 @@ This document provides a comprehensive summary of the `behapy` Python package, i
   - [behapy (Root)](#behapy-root)
   - [behapy._core](#behapy_core)
   - [behapy.datasets](#behapy_datasets)
+  - [behapy.external](#behapy_external)
   - [behapy.io](#behapy_io)
   - [behapy.plotting](#behapy_plotting)
   - [behapy.preprocessing](#behapy_preprocessing)
@@ -23,6 +24,7 @@ The `behapy` package is organized into several subpackages, each focusing on a s
 
 - `_core`: Core data structures (e.g., `BehapyData`).
 - `datasets`: Built-in and synthetic datasets.
+- `external`: Wrappers and integrations for external tools (BehaviorFlow, NEG, VAME, PyRAT).
 - `io`: Reading and writing data from various formats (DLC, SLEAP, H5AD, CSV).
 - `plotting`: Visualization tools for behavior, embeddings, trajectories, and statistics.
 - `preprocessing`: Data cleaning, normalization, smoothing, and feature engineering.
@@ -38,6 +40,7 @@ The package relies on the following key libraries (pinned for stability):
 - **Visualization**: `matplotlib`, `seaborn`
 - **Computation**: `scipy`, `numba`, `scikit-learn`
 - **Analysis**: `umap-learn==0.5.5`, `hdbscan`, `leidenalg==0.10.0`, `python-igraph`, `networkx`, `python-louvain`, `statsmodels`
+- **External Integrations**: `unrar` (for PyRAT datasets)
 
 ---
 
@@ -48,7 +51,7 @@ The package relies on the following key libraries (pinned for stability):
 #### `behapy.__init__`
 - **File Path**: `behapy/__init__.py`
 - **Description**: Package entry point. Exposes main submodules and key classes/functions.
-- **Imports**: `datasets`, `get`, `io`, `neighbors`, `plotting` (as `pl`), `preprocessing` (as `pp`), `tools` (as `tl`), `BehapyData`, `settings`, `get_settings`, `set_figure_params`, `__version__`.
+- **Imports**: `datasets`, `external`, `get`, `io`, `neighbors`, `plotting` (as `pl`), `preprocessing` (as `pp`), `tools` (as `tl`), `BehapyData`, `settings`, `get_settings`, `set_figure_params`, `__version__`.
 
 #### `behapy._settings`
 - **File Path**: `behapy/_settings.py`
@@ -62,7 +65,7 @@ The package relies on the following key libraries (pinned for stability):
 #### `behapy._version`
 - **File Path**: `behapy/_version.py`
 - **Description**: Version information.
-- **Variables**: `__version__` (current: 0.4.0).
+- **Variables**: `__version__` (current: 0.5.0).
 
 ---
 
@@ -90,6 +93,35 @@ The package relies on the following key libraries (pinned for stability):
 - **Description**: Utilities for generating synthetic behavioral data.
 - **Functions**:
   - `synthetic_data(n_frames: int = 1000, n_bodyparts: int = 5) -> BehapyData`: Generates a `BehapyData` object with random coordinates and likelihoods.
+
+---
+
+### behapy.external
+
+#### `behapy.external.pyrat`
+- **File Path**: `behapy/external/pyrat.py` (and `behapy/external/pyrat_core/`)
+- **Description**: Integration with PyRAT for multi-animal tracking and electrophysiology analysis.
+- **Key Modules**:
+  - `processing`: Core data processing functions.
+  - `ingest`: Data ingestion utilities.
+  - `analysis`: Analytical functions for trajectories and interactions.
+- **Functions**:
+  - `Trajectory`, `TrajectoryMA`: Trajectory analysis for single and multiple animals.
+  - `Heatmap`: Spatial occupancy heatmaps.
+  - `Interaction`, `FieldDetermination`: Social interaction analysis.
+  - `Blackrock`, `LFP`, `SpacialNeuralActivity`: Electrophysiology data processing.
+
+#### `behapy.external.behaviorflow`
+- **File Path**: `behapy/external/behaviorflow.py`
+- **Description**: Wrapper for BehaviorFlow movement/zone analysis.
+
+#### `behapy.external.neg`
+- **File Path**: `behapy/external/neg.py`
+- **Description**: Wrapper for NEG grid exploration analysis.
+
+#### `behapy.external.vame`
+- **File Path**: `behapy/external/vame.py`
+- **Description**: Wrapper for VAME latent vector and cluster analysis.
 
 ---
 
@@ -251,9 +283,20 @@ The package relies on the following key libraries (pinned for stability):
 
 ---
 
-## Recent Improvements (v0.4.0-statistical-suite)
+## Recent Improvements (v0.5.0-pyrat-integration)
 
-### Statistical Testing Module
+### PyRAT Integration
+- Fully integrated PyRAT functionalities into `behapy.external.pyrat`.
+- Added support for multi-animal tracking analysis (`Trajectory`, `TrajectoryMA`, `Heatmap`, `MotionMetrics`).
+- Added support for social interaction analysis (`FieldDetermination`, `Interaction`).
+- Added support for electrophysiology data processing (`Blackrock`, `LFP`, `SpacialNeuralActivity`).
+- Confirmed compatibility with PyRAT dataset 5865893.
+
+### External Modules Standardization
+- Standardized import structure for all external modules (BehaviorFlow, NEG, VAME, PyRAT).
+- All external tools are now accessible directly under `behapy.external`.
+
+### Statistical Testing Module (v0.4.0)
 - Added a comprehensive suite of statistical tests for comparing control vs. treatment groups.
 - Supports permutation tests, t-tests, Mann-Whitney U tests, and Chi-square/Fisher's exact tests.
 - Automated multiple comparison correction (FDR-BH, Bonferroni).
@@ -268,8 +311,3 @@ The package relies on the following key libraries (pinned for stability):
 - New statistical plots: `effect_sizes()` (forest/bar) and `statistical_summary()`.
 - Enhanced `transition_matrix()` with comparison modes and significance overlays.
 - Standardized Seaborn integration for high-quality figures.
-
-### Performance & Stability
-- Continued use of intelligent downsampling for high-performance plotting on 1M+ frame datasets.
-- Refined PCA component handling for small feature sets.
-- Extensive unit test coverage for new statistical modules.
