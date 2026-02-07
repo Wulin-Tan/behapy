@@ -46,6 +46,7 @@ A Scanpy-like framework for analyzing high-dimensional behavioral time series da
 - **Markers**: `rank_features_groups()` for differential feature analysis.
 
 ### External Integrations (`bh.external`)
+- **PyRAT**: `bh.external.pyrat` for tracking, interaction, and electrophysiology analysis.
 - **BehaviorFlow**: `bh.external.behaviorflow` for movement analysis and zone reporting.
 - **NEG**: `bh.external.neg` for grid-based exploration analysis (EPM).
 - **VAME**: `bh.external.vame` wrapper for Variational Animal Motion Embedding.
@@ -161,6 +162,20 @@ from behapy.external import vame
 config = vame.init_new_project(...)
 ```
 
+### PyRAT (Tracking & Electrophysiology)
+```python
+from behapy.external import pyrat
+
+# Trajectory Analysis
+# traj = pyrat.Trajectory(x, y, time)
+
+# Multi-animal Analysis
+# traj_ma = pyrat.TrajectoryMA(data_dict)
+
+# Electrophysiology
+# lfp = pyrat.LFP(signal, fs)
+```
+
 
 ## Usage Example: Statistical Comparison
 
@@ -187,7 +202,7 @@ Coming soon.
 
 ## Acknowledgment
 
-This project was developed based on specifications provided in the [steps.md](file:///Users/wulintan/Nutstore%20Files/Nutstore_Onedrive_SYSU/research/code_pool/behapy_project/02_behapy_project_trae/plans/steps.md) and [reference_summary.md](file:///Users/wulintan/Nutstore%20Files/Nutstore_Onedrive_SYSU/research/code_pool/behapy_project/02_behapy_project_trae/plans/reference_summary.md) guidelines. It references and builds upon the following materials and open-source projects:
+This project references and builds upon the following materials and open-source projects:
 
 - [A-SOID](https://github.com/YttriLab/A-SOID) (referenced for multi-animal pose data handling)
 - [DLC2Kinematics](https://github.com/AdaptiveMotorControlLab/DLC2Kinematics) (referenced for kinematic feature extraction)
