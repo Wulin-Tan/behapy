@@ -204,6 +204,9 @@ Coming soon.
 
 This project references and builds upon the following materials and open-source projects:
 
+- [VAME](https://github.com/LINCellularNeuroscience/VAME) (referenced for variational animal motion embedding)
+- [NEG](https://github.com/MZelko82/NEG) (referenced for novel exploration growth analysis)
+- [BehaviorFlow](https://github.com/ETHZ-INS/BehaviorFlow) (referenced for movement and zone analysis)
 - [A-SOID](https://github.com/YttriLab/A-SOID) (referenced for multi-animal pose data handling)
 - [DLC2Kinematics](https://github.com/AdaptiveMotorControlLab/DLC2Kinematics) (referenced for kinematic feature extraction)
 - [PyRAT](https://github.com/D-Seabra/PyRAT) (referenced for behavioral analysis patterns)
