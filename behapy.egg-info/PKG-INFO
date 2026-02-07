@@ -1,3 +1,63 @@
+Metadata-Version: 2.1
+Name: behapy
+Version: 0.4.0
+Summary: A Scanpy-like framework for analyzing high-dimensional behavioral time series data
+Author-email: Wulin Tan <wulin.tan9527@gmail.com>
+Maintainer-email: Wulin Tan <wulin.tan9527@gmail.com>
+License: BSD-3-Clause
+Project-URL: Homepage, https://github.com/Wulin-Tan/behapy
+Project-URL: Repository, https://github.com/Wulin-Tan/behapy
+Project-URL: Documentation, https://github.com/Wulin-Tan/behapy/tree/main/docs
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: anndata>=0.8.0
+Requires-Dist: scanpy>=1.9.0
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: scipy>=1.7.0
+Requires-Dist: scikit-learn>=1.0.0
+Requires-Dist: matplotlib>=3.4.0
+Requires-Dist: seaborn>=0.11.0
+Requires-Dist: umap-learn>=0.5.0
+Requires-Dist: numba>=0.54.0
+Requires-Dist: h5py>=3.0.0
+Requires-Dist: tqdm>=4.62.0
+Requires-Dist: leidenalg
+Requires-Dist: python-louvain
+Requires-Dist: hdbscan
+Requires-Dist: igraph
+Requires-Dist: networkx
+Requires-Dist: annoy>=1.17.0
+Requires-Dist: statsmodels
+Requires-Dist: shapely>=1.7.0
+Requires-Dist: openpyxl>=3.0.0
+Provides-Extra: gpu
+Requires-Dist: cupy; extra == "gpu"
+Provides-Extra: video
+Requires-Dist: opencv-python; extra == "video"
+Requires-Dist: moviepy; extra == "video"
+Provides-Extra: interactive
+Requires-Dist: plotly; extra == "interactive"
+Requires-Dist: streamlit; extra == "interactive"
+Provides-Extra: vame
+Requires-Dist: torch; extra == "vame"
+Requires-Dist: ruamel.yaml; extra == "vame"
+Requires-Dist: pyyaml; extra == "vame"
+Requires-Dist: opencv-python; extra == "vame"
+Requires-Dist: pytest-shutil; extra == "vame"
+Requires-Dist: hmmlearn; extra == "vame"
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"
+Requires-Dist: nbsphinx; extra == "docs"
+
 # behapy
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
@@ -62,11 +122,6 @@ A Scanpy-like framework for analyzing high-dimensional behavioral time series da
 pip install behapy
 ```
 
-To use VAME integration, install with the `vame` extra:
-```bash
-pip install "behapy[vame]"
-```
-
 ### Installation Guide for Users in China
 
 If you are in China, it is recommended to use the PyPI mirror provided by Tsinghua University to accelerate downloads:
@@ -109,58 +164,6 @@ bh.tl.leiden(bdata)
 # Visualization
 bh.pl.umap(bdata, color='leiden')
 ```
-
-## Using External Integrations
-
-Behapy integrates powerful external tools for specialized analyses.
-
-### BehaviorFlow (Movement & Zones)
-```python
-import behapy as bh
-from behapy.external import behaviorflow
-
-# Load data
-adata = bh.io.read_dlc("video.h5")
-
-# Calculate movement statistics (speed, acceleration, moving/stationary)
-adata = behaviorflow.calculate_movement(adata, x_col='x', y_col='y')
-
-# Define zones (e.g., center vs periphery)
-zones = {
-    'center': pd.DataFrame({'x': [200, 400, 400, 200], 'y': [200, 200, 400, 400]})
-}
-# Analyze zone visits
-adata = behaviorflow.zone_analysis(adata, zones)
-
-print(adata.uns['zone_reports'])
-```
-
-### NEG (Grid-Based Exploration)
-Ideal for Elevated Plus Maze (EPM) or Open Field Test (OFT).
-```python
-from behapy.external import neg
-
-# Analyze grid exploration
-adata = neg.analyze_exploration(
-    adata, 
-    grid_size=10.0,
-    in_open_col='InOpen',    # Boolean column for Open Arm
-    in_closed_col='InClosed' # Boolean column for Closed Arm
-)
-
-# Results stored in adata.uns
-print(adata.uns['exploration_results'])
-```
-
-### VAME (Variational Animal Motion Embedding)
-```python
-from behapy.external import vame
-
-# Access VAME core functionality through behapy
-# (Refer to VAME documentation for specific usage patterns)
-config = vame.init_new_project(...)
-```
-
 
 ## Usage Example: Statistical Comparison
 

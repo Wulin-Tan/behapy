@@ -3,7 +3,6 @@ from . import datasets, get, io, neighbors
 from . import plotting as pl
 from . import preprocessing as pp
 from . import tools as tl
-from . import external
 from ._core._behapydata import BehapyData
 from ._settings import get_settings, set_figure_params, settings
 from ._version import __version__
@@ -17,7 +16,6 @@ __all__ = [
     "pp",
     "tl",
     "pl",
-    "external",
     "datasets",
     "neighbors",
     "get",

@@ -35,6 +35,8 @@ dependencies = [
     "networkx",
     "annoy>=1.17.0",
     "statsmodels",
+    "shapely>=1.7.0",
+    "openpyxl>=3.0.0",
 ]
 
 [project.urls]
@@ -46,6 +48,7 @@ Documentation = "https://github.com/Wulin-Tan/behapy/tree/main/docs"
 gpu = ["cupy"]
 video = ["opencv-python", "moviepy"]
 interactive = ["plotly", "streamlit"]
+vame = ["torch", "ruamel.yaml", "pyyaml", "opencv-python", "pytest-shutil", "hmmlearn"]
 dev = ["black", "isort", "pytest", "mypy", "flake8"]
 docs = ["sphinx", "sphinx-rtd-theme", "nbsphinx"]
 
@@ -62,3 +65,7 @@ testpaths = ["tests"]
 
 [tool.mypy]
 ignore_missing_imports = true
+
+[tool.setuptools.packages.find]
+include = ["behapy*"]
+exclude = ["roadmap*", "tests*", "scripts*", "docs*", "examples*"]

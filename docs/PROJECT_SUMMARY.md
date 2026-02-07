@@ -19,6 +19,7 @@ The project aims to standardize behavioral analysis by providing a comprehensive
     - **`io/`**: Input/Output modules for reading DLC/SLEAP files and writing H5AD/CSV.
     - **`preprocessing/` (bp.pp)**: Functions for QC, filtering, smoothing, normalization, and feature extraction.
     - **`tools/` (bp.tl)**: Analytical tools including dimensionality reduction (PCA, UMAP, TSNE), clustering (Leiden, HDBSCAN), and temporal analysis.
+    - **`external/` (bh.external)**: Integrated external tools (BehaviorFlow, NEG, VAME) for specialized behavioral analyses.
     - **`plotting/` (bp.pl)**: Visualization tools for trajectories, embeddings, behaviors, and temporal patterns.
     - **`datasets/`**: Utilities for generating synthetic behavioral data.
     - **`utils/`**: Internal utility functions and validation helpers.
@@ -83,6 +84,12 @@ The project aims to standardize behavioral analysis by providing a comprehensive
 - `compute_transition_entropy(bdata, key)`: Measures behavioral predictability via Shannon entropy.
 - `detect_bouts(bdata, key, min_duration)`: Identifies continuous episodes of stable behavior.
 - `compute_bout_statistics(bdata, key)`: Computes frequency, duration, and time metrics for behavioral bouts.
+
+### behapy.external
+- `behaviorflow.calculate_movement(adata, ...)`: Movement statistics using BehaviorFlow.
+- `behaviorflow.zone_analysis(adata, ...)`: Zone occupancy and transition analysis.
+- `neg.analyze_exploration(adata, ...)`: Grid-based exploration metrics for EPM/OFT.
+- `vame.init_new_project(...)`: Access to VAME's project initialization and core tools.
 
 ### behapy.plotting (bp.pl)
 - `pca(bdata)`, `umap(bdata)`, `tsne(bdata)`: Standard embedding plots colored by cluster or feature.
