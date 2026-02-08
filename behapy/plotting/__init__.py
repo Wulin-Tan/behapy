@@ -5,6 +5,12 @@ from ._temporal import bout_duration_distribution, ethogram as ethogram_temporal
 from ._statistics import effect_sizes, statistical_summary
 from ._trajectory import heatmap as trajectory_heatmap
 from ._trajectory import trajectory
+from ._external import (
+    plot_behaviorflow_zones,
+    plot_neg_grids,
+    plot_pyrat_trajectory,
+    plot_vame_umap,
+)
 
 __all__ = [
     "pca",
@@ -26,4 +32,8 @@ __all__ = [
     "time_series",
     "effect_sizes",
     "statistical_summary",
+    "plot_behaviorflow_zones",
+    "plot_neg_grids",
+    "plot_pyrat_trajectory",
+    "plot_vame_umap",
 ]

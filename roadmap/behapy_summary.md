@@ -204,6 +204,15 @@ The package relies on the following key libraries (pinned for stability):
   - `trajectory()`: Plots spatial trajectories with downsampling.
   - `trajectory_heatmap()`: Heatmap of spatial occupancy.
 
+#### `behapy.plotting._external`
+- **File Path**: `behapy/plotting/_external.py`
+- **Description**: Wrappers for external tool visualizations.
+- **Functions**:
+  - `plot_behaviorflow_zones()`: Plots zones and trajectory (BehaviorFlow).
+  - `plot_neg_grids()`: Plots exploration grids (NEG).
+  - `plot_pyrat_trajectory()`: Wraps PyRAT's Trajectory function.
+  - `plot_vame_umap()`: Wraps VAME's UMAP visualization.
+
 ---
 
 ### behapy.preprocessing
@@ -295,6 +304,11 @@ The package relies on the following key libraries (pinned for stability):
 ### External Modules Standardization
 - Standardized import structure for all external modules (BehaviorFlow, NEG, VAME, PyRAT).
 - All external tools are now accessible directly under `behapy.external`.
+
+### Visualization Integration for External Tools
+- Added native wrappers for external visualization functions in `behapy.pl`.
+- `plot_behaviorflow_zones`, `plot_neg_grids`, `plot_pyrat_trajectory`, `plot_vame_umap`.
+- Ensures compatibility with `BehapyData` structure.
 
 ### Statistical Testing Module (v0.4.0)
 - Added a comprehensive suite of statistical tests for comparing control vs. treatment groups.

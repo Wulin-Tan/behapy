@@ -98,11 +98,9 @@ def zone_analysis(
     moving_col = f'{movement_key}_is_moving'
     
     if speed_col in adata.obs:
-        df['speed'] = adata.obs[speed_col].values
-    if acc_col in adata.obs:
-        df['acceleration'] = adata.obs[acc_col].values
-    if moving_col in adata.obs:
-        df['is_moving'] = adata.obs[moving_col].values
+        # TODO: Add logic to pass existing movement stats to TrackingData if needed
+        # For now, bf_analysis.zone_report calculates stats based on tracking data
+        pass
         
     frames = np.arange(len(df))
     fps = adata.uns.get('fps', 30)
@@ -110,6 +108,10 @@ def zone_analysis(
     td = TrackingData({'body': df}, frames, fps, "behapy_data")
     td.zones = zones
     
+    # Store zones in uns for plotting
+    adata.uns[f'{key_added}_zones'] = zones
+
+    # Run analysis for each zone
     reports = {}
     for zone_name in zones:
         rep = bf_analysis.zone_report(td, 'body', zone_name)

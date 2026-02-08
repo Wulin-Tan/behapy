@@ -56,6 +56,7 @@ A Scanpy-like framework for analyzing high-dimensional behavioral time series da
 - **Trajectories**: `trajectory()`, `trajectory_heatmap()`.
 - **Behavior**: `ethogram()`, `behavior_pie()`, `bout_distribution()`.
 - **Features**: `feature_group_heatmap()`, `feature_time_heatmap()`, `rank_features_groups()`.
+- **External**: `plot_behaviorflow_zones()`, `plot_neg_grids()`, `plot_pyrat_trajectory()`, `plot_vame_umap()`.
 
 ## Installation
 
@@ -151,6 +152,9 @@ adata = neg.analyze_exploration(
 
 # Results stored in adata.uns
 print(adata.uns['exploration_results'])
+
+# Visualize exploration grids
+bh.pl.plot_neg_grids(adata)
 ```
 
 ### VAME (Variational Animal Motion Embedding)
@@ -160,6 +164,9 @@ from behapy.external import vame
 # Access VAME core functionality through behapy
 # (Refer to VAME documentation for specific usage patterns)
 config = vame.init_new_project(...)
+
+# Visualize VAME UMAP (after analysis)
+# bh.pl.plot_vame_umap(adata, label_col='vame_cluster')
 ```
 
 ### PyRAT (Tracking & Electrophysiology)
@@ -174,6 +181,9 @@ from behapy.external import pyrat
 
 # Electrophysiology
 # lfp = pyrat.LFP(signal, fs)
+
+# Visualize Trajectory using PyRAT engine
+bh.pl.plot_pyrat_trajectory(adata, bodypart='nose')
 ```
 
 
